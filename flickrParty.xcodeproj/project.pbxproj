@@ -43,6 +43,7 @@
 		11E2591B1C9EE4CA00E40A5B /* NSDateFormatterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E2591A1C9EE4CA00E40A5B /* NSDateFormatterExtensions.swift */; };
 		11E2591D1C9EE50600E40A5B /* NSDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E2591C1C9EE50600E40A5B /* NSDataExtensions.swift */; };
 		11E2591F1C9EF21300E40A5B /* MediaBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E2591E1C9EF21300E40A5B /* MediaBundle.swift */; };
+		11E259211C9EF6A100E40A5B /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E259201C9EF6A100E40A5B /* FeedCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,7 @@
 		11E2591A1C9EE4CA00E40A5B /* NSDateFormatterExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateFormatterExtensions.swift; sourceTree = "<group>"; };
 		11E2591C1C9EE50600E40A5B /* NSDataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDataExtensions.swift; sourceTree = "<group>"; };
 		11E2591E1C9EF21300E40A5B /* MediaBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaBundle.swift; sourceTree = "<group>"; };
+		11E259201C9EF6A100E40A5B /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		47C3500EB82931AFD33DE339 /* Pods_flickrParty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flickrParty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8295180B2203CE52A6D1665E /* Pods-flickrParty.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flickrParty.debug.xcconfig"; path = "Pods/Target Support Files/Pods-flickrParty/Pods-flickrParty.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -233,6 +235,7 @@
 		11E258DB1C9ECCBF00E40A5B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				11E259201C9EF6A100E40A5B /* FeedCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 				11E258D11C9EBEDD00E40A5B /* AppDelegate.swift in Sources */,
 				11E2590B1C9ECD6E00E40A5B /* UIFontExtensions.swift in Sources */,
 				11E2590F1C9ECEEE00E40A5B /* BaseTableViewController.swift in Sources */,
+				11E259211C9EF6A100E40A5B /* FeedCell.swift in Sources */,
 				11E259151C9ED0DA00E40A5B /* NetworkClient.swift in Sources */,
 				11E2591D1C9EE50600E40A5B /* NSDataExtensions.swift in Sources */,
 				11E2590D1C9ECD9900E40A5B /* UIColorExtensions.swift in Sources */,

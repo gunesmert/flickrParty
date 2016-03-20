@@ -9,6 +9,8 @@
 import UIKit
 import PureLayout
 
+let FeedCellReuseIdentifier = "FeedCellReuseIdentifier"
+
 class MainViewController : BaseTableViewController {
     private var feedElements: [FeedElement]? = []
     
@@ -38,6 +40,8 @@ class MainViewController : BaseTableViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.whiteColor()
+        
+        tableView.registerClass(FeedCell.classForCoder(), forCellReuseIdentifier: FeedCellReuseIdentifier)
         
         loadData(withRefresh: true)
     }
@@ -70,11 +74,65 @@ class MainViewController : BaseTableViewController {
                         self.feedElements?.append(element)
                     }
                 }
-            } else {
                 
+                if self.feedElements?.count > 0 {
+                    self.finishLoading(withMessage: nil, andStyle: StatusFooterViewStyle.None)
+                } else {
+                    self.finishLoading(withMessage: NSLocalizedString("There are no elements.\nPlease pull to refresh!", comment: ""), andStyle: StatusFooterViewStyle.Error)
+                }
+            } else {
+                self.finishLoading(withMessage: NSLocalizedString("Unfortunately, we are not able to fetch feed elements. Please pull to refresh!", comment: ""), andStyle: StatusFooterViewStyle.Error)
             }
+            
+            self.tableView.reloadData()
         }
         
         return true
+    }
+    
+    // MARK: - UITableViewDelegate
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
+    // MARK: - UITableViewDataSource
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let _ = feedElements else {
+            return 0
+        }
+        
+        return (feedElements?.count)!
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(FeedCellReuseIdentifier, forIndexPath: indexPath) as! FeedCell
+        
+        cell.layoutMargins = UIEdgeInsetsZero
+        cell.preservesSuperviewLayoutMargins = false
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        
+        configure(PositionCell: cell, atIndexPath: indexPath)
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 200.0
+    }
+    
+    // MARK: - Cell Configuration
+    
+    func configure(PositionCell cell: FeedCell, atIndexPath indexPath: NSIndexPath) {
+        if indexPath.row >= feedElements?.count {
+            return
+        }
+        
+        let element = feedElements![indexPath.row]
     }
 }
