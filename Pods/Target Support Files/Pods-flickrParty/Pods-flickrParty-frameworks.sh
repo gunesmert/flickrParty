@@ -86,6 +86,7 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$CONFIGURATION_BUILD_DIR/Alamofire/Alamofire.framework"
   install_framework "$CONFIGURATION_BUILD_DIR/AlamofireObjectMapper/AlamofireObjectMapper.framework"
+  install_framework "$CONFIGURATION_BUILD_DIR/Kingfisher/Kingfisher.framework"
   install_framework "$CONFIGURATION_BUILD_DIR/ObjectMapper/ObjectMapper.framework"
   install_framework "$CONFIGURATION_BUILD_DIR/PureLayout/PureLayout.framework"
   install_framework "$CONFIGURATION_BUILD_DIR/SwiftHEXColors/SwiftHEXColors.framework"
@@ -93,6 +94,7 @@ fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$CONFIGURATION_BUILD_DIR/Alamofire/Alamofire.framework"
   install_framework "$CONFIGURATION_BUILD_DIR/AlamofireObjectMapper/AlamofireObjectMapper.framework"
+  install_framework "$CONFIGURATION_BUILD_DIR/Kingfisher/Kingfisher.framework"
   install_framework "$CONFIGURATION_BUILD_DIR/ObjectMapper/ObjectMapper.framework"
   install_framework "$CONFIGURATION_BUILD_DIR/PureLayout/PureLayout.framework"
   install_framework "$CONFIGURATION_BUILD_DIR/SwiftHEXColors/SwiftHEXColors.framework"

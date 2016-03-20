@@ -3,6 +3,7 @@ PODS:
   - AlamofireObjectMapper (2.1.2):
     - Alamofire (~> 3.2)
     - ObjectMapper (~> 1.0)
+  - Kingfisher (2.1.0)
   - ObjectMapper (1.1.5)
   - PureLayout (3.0.1)
   - SwiftHEXColors (1.0.2)
@@ -10,6 +11,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - AlamofireObjectMapper
+  - Kingfisher
   - ObjectMapper
   - PureLayout
   - SwiftHEXColors
@@ -17,10 +19,11 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: f11d8624a05f5d39e0c99309b3e600a3ba64298a
   AlamofireObjectMapper: 82391c31f23e37bdb2660da174bcf81b202da39d
+  Kingfisher: 3ac09acad75a25ab22f6d7cef3de10d61dd4792d
   ObjectMapper: 528b1a6677a6acac7747edd508576983e76a9148
   PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
   SwiftHEXColors: 1238ce6ee5c698ef9caf00fad72876602ecd9df6
 
-PODFILE CHECKSUM: 1904063c4660a9ddaa2ab5cf6c6d650bacd4f9c7
+PODFILE CHECKSUM: 0e08c174e0a90dd7c2004ffb9047a493f0148152
 
 COCOAPODS: 1.0.0.beta.4

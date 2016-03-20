@@ -97,7 +97,6 @@ class BaseNavigationController : UINavigationController, UINavigationControllerD
         super.viewDidLoad()
         
         self.navigationBar.barTintColor = UIColor.whiteColor()
-        self.navigationBar.translucent = false
         self.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.mediumFont(withSize: 16.0),
             NSForegroundColorAttributeName: UIColor.lightGrayTextColor()]
         

@@ -14,9 +14,9 @@ class BaseTableViewController : BaseViewController {
     
     var loadInProgress: Bool! = false
     
-    var loadIndicatorView: UIActivityIndicatorView!
-    
-    var emptyStateView: StatusFooterView!
+    private var loadIndicatorView: UIActivityIndicatorView!
+    private var emptyStateView: StatusFooterView!
+    private var refreshControl: UIRefreshControl!
     
     // MARK: - Constructors
     
@@ -37,11 +37,17 @@ class BaseTableViewController : BaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.Interactive
-        tableView.separatorInset = UIEdgeInsetsMake(0.0, 10.0, 0.0, 10.0)
-        tableView.separatorColor = UIColor.lightGraySeparatorColor()
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         self.view.addSubview(tableView)
         self.view.sendSubviewToBack(tableView)
+        
+        if canPullToRefresh() == true {
+            refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+            
+            tableView.addSubview(refreshControl)
+        }
     }
     
     // MARK: - Loading
@@ -150,6 +156,20 @@ class BaseTableViewController : BaseViewController {
         footerView.set(style: style, andMessage: message)
         
         tableView.tableFooterView = footerView
+    }
+    
+    // MARK: - Refresh
+    
+    func canPullToRefresh() -> Bool {
+        return false
+    }
+    
+    func refresh(refreshControl: UIRefreshControl) {
+        loadData(withRefresh: true)
+    }
+    
+    func endRefreshing() {
+        refreshControl.endRefreshing()
     }
     
     // MARK: - Keyboard Notifications

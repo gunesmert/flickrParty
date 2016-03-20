@@ -8,5 +8,6 @@ pod 'Alamofire'
 pod 'ObjectMapper'
 pod 'AlamofireObjectMapper'
 pod 'SwiftHEXColors'
+pod 'Kingfisher'
 
 end

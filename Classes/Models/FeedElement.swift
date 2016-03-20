@@ -68,7 +68,7 @@ class FeedElement: Mappable {
         
         bundle.urlString = self.url_z
         bundle.width = Int(self.width_z!)
-        bundle.width = Int(self.height_z!)
+        bundle.height = Int(self.height_z!)
         
         return bundle
     }()
@@ -78,7 +78,7 @@ class FeedElement: Mappable {
         
         bundle.urlString = self.url_l
         bundle.width = Int(self.width_l!)
-        bundle.width = Int(self.height_l!)
+        bundle.height = Int(self.height_l!)
         
         return bundle
     }()
@@ -88,8 +88,20 @@ class FeedElement: Mappable {
         
         bundle.urlString = self.url_o
         bundle.width = Int(self.width_o!)
-        bundle.width = Int(self.height_o!)
+        bundle.height = Int(self.height_o!)
         
         return bundle
+    }()
+    
+    lazy var formattedTagsString: String = {
+        var formattedString: String = ""
+        
+        let tags = self.tagsString!.componentsSeparatedByString(" ")
+        
+        for tag in tags {
+            formattedString += "#\(tag) "
+        }
+        
+        return formattedString
     }()
 }

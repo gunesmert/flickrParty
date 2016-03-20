@@ -8,6 +8,7 @@
 
 import UIKit
 import PureLayout
+import Kingfisher
 
 let FeedCellReuseIdentifier = "FeedCellReuseIdentifier"
 
@@ -52,6 +53,10 @@ class MainViewController : BaseTableViewController {
         return true
     }
     
+    override func canPullToRefresh() -> Bool {
+        return true
+    }
+    
     // MARK: - Data
     
     override func loadData(withRefresh refresh: Bool) -> Bool {
@@ -84,19 +89,23 @@ class MainViewController : BaseTableViewController {
                 self.finishLoading(withMessage: NSLocalizedString("Unfortunately, we are not able to fetch feed elements. Please pull to refresh!", comment: ""), andStyle: StatusFooterViewStyle.Error)
             }
             
+            if refresh == true {
+                self.endRefreshing()
+            }
+            
             self.tableView.reloadData()
         }
         
         return true
     }
     
-    // MARK: - UITableViewDelegate
+    // MARK: - UITableView Delegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
     }
     
-    // MARK: - UITableViewDataSource
+    // MARK: - UITableView DataSource
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -123,7 +132,19 @@ class MainViewController : BaseTableViewController {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 200.0
+        if indexPath.row >= feedElements?.count {
+            return 0.0
+        }
+        
+        let element = feedElements![indexPath.row]
+        
+        let bundle = element.mediaBundle_z
+        
+        if bundle.width == nil || bundle.height == nil {
+            return 200.0
+        }
+        
+        return ((CGFloat(bundle.height!) * self.view.frame.size.width) / CGFloat(bundle.width!))
     }
     
     // MARK: - Cell Configuration
@@ -134,5 +155,15 @@ class MainViewController : BaseTableViewController {
         }
         
         let element = feedElements![indexPath.row]
+        
+        let bundle = element.mediaBundle_z
+        
+        cell.feedImageView.kf_setImageWithURL(NSURL(string: bundle.urlString!)!)
+        
+        cell.tagsLabel.text = element.formattedTagsString
+        
+        cell.titleLabel.text = element.title
+        
+        cell.authorNameLabel.text = element.author
     }
 }
