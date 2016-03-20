@@ -35,7 +35,7 @@ class NetworkClient {
         return Static.instance!
     }
     
-    func getFeedElements(withPageNumber pageNumber:NSNumber, withTags tags: [String], completion: (NSNumber?, [FeedElement]?, NSError?) -> Void) {
+    func getFeedElements(withPageNumber pageNumber:NSNumber, withTags tags: [String], completion: (NSNumber?, NSNumber?, [FeedElement]?, NSError?) -> Void) {
         var parameters: [String: AnyObject] = [:]
         parameters["page"] = pageNumber
         parameters["per_page"] = 10
@@ -67,7 +67,7 @@ class NetworkClient {
                     guard let localData = data else {
                         let inlineError = NSError(domain: FLCNetworkClientErrorDomain, code: ErrorCode.InvalidParameters.rawValue, userInfo: nil)
                         
-                        completion(nil, nil, inlineError)
+                        completion(nil, nil, nil, inlineError)
                         
                         return
                     }
@@ -75,7 +75,7 @@ class NetworkClient {
                     guard let trimmedData = self.trim(Data: localData) else {
                         let inlineError = NSError(domain: FLCNetworkClientErrorDomain, code: ErrorCode.InvalidParameters.rawValue, userInfo: nil)
                         
-                        completion(nil, nil, inlineError)
+                        completion(nil, nil, nil, inlineError)
                         
                         return
                     }
@@ -83,18 +83,20 @@ class NetworkClient {
                     guard let jsonDict = trimmedData.jsonObjectRepresentation() as! [String: AnyObject]? else {
                         let inlineError = NSError(domain: FLCNetworkClientErrorDomain, code: ErrorCode.InvalidJSON.rawValue, userInfo: nil)
                         
-                        completion(nil, nil, inlineError)
+                        completion(nil, nil, nil, inlineError)
                         
                         return;
                     }
                     
                     let pageNumber = (jsonDict as AnyObject).valueForKeyPath("photos.page") as! NSNumber
                     
+                    let numberOfPages = (jsonDict as AnyObject).valueForKeyPath("photos.pages") as! NSNumber
+                    
                     let elements: [FeedElement]? = Mapper<FeedElement>().mapArray((jsonDict as AnyObject).valueForKeyPath("photos.photo"))
                     
-                    completion(pageNumber, elements, nil)
+                    completion(pageNumber, numberOfPages, elements, nil)
                 } else {
-                    completion(nil, nil, error)
+                    completion(nil, nil, nil, error)
                 }
         }
     }

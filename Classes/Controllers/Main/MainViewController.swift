@@ -70,8 +70,14 @@ class MainViewController : BaseTableViewController {
             pageNumber = NSNumber(integer: pageNumber.integerValue + 1)
         }
         
-        NetworkClient.sharedClient.getFeedElements(withPageNumber: pageNumber, withTags: ["party"]) { (pageNumber, elements, error) -> Void in
+        NetworkClient.sharedClient.getFeedElements(withPageNumber: pageNumber, withTags: ["party"]) { (pageNumber, numberOfPages, elements, error) -> Void in
             if error == nil {
+                if pageNumber?.integerValue < numberOfPages?.integerValue {
+                    self.canLoadMore = true
+                } else {
+                    self.canLoadMore = false
+                }
+                
                 if refresh == true {
                     self.feedElements = elements
                 } else {

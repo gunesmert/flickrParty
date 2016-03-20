@@ -13,6 +13,7 @@ class BaseTableViewController : BaseViewController {
     var tableView: UITableView!
     
     var loadInProgress: Bool! = false
+    var canLoadMore: Bool! = false
     
     private var loadIndicatorView: UIActivityIndicatorView!
     private var emptyStateView: StatusFooterView!
@@ -210,7 +211,7 @@ class BaseTableViewController : BaseViewController {
     }
 }
 
-// MARK: - UITableViewDelegate
+// MARK: - UITableView Delegate
 
 extension BaseTableViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -218,7 +219,7 @@ extension BaseTableViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - UITableViewDataSource
+// MARK: - UITableView DataSource
 
 extension BaseTableViewController: UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -252,6 +253,20 @@ extension BaseTableViewController: UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        if scrollView != tableView {
+            return
+        }
         
+        if scrollView.contentSize.height < scrollView.frame.size.height {
+            return
+        }
+        
+        if loadInProgress == true || canLoadMore == false {
+            return
+        }
+        
+        if ((scrollView.contentSize.height - scrollView.frame.size.height) - scrollView.contentOffset.y < 10.0) {
+            loadData(withRefresh: false)
+        }
     }
 }
