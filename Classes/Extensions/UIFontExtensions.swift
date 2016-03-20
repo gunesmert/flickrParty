@@ -14,10 +14,6 @@ extension UIFont {
         return UIFont(name: "SFUIDisplay-Regular", size: size)!
     }
     
-    public class func boldFont(withSize size: CGFloat) -> UIFont {
-        return UIFont(name: "SFUIDisplay-Bold", size: size)!
-    }
-    
     public class func lightFont(withSize size: CGFloat) -> UIFont {
         return UIFont(name: "SFUIDisplay-Light", size: size)!
     }

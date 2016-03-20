@@ -26,10 +26,6 @@ class FeedElement: Mappable {
     private var height_l: AnyObject?
     private var width_l: AnyObject?
     
-    private var url_o: String?
-    private var height_o: AnyObject?
-    private var width_o: AnyObject?
-    
     required init?(_ map: Map) {
         
     }
@@ -49,11 +45,9 @@ class FeedElement: Mappable {
         url_l               <- map["url_l"]
         height_l            <- map["height_l"]
         width_l             <- map["width_l"]
-        
-        url_o               <- map["url_o"]
-        height_o            <- map["height_o"]
-        width_o             <- map["width_o"]
     }
+    
+    //MARK: - Lazy Variables
     
     lazy var dateTaken: NSDate = {
         [unowned self] in
@@ -98,26 +92,6 @@ class FeedElement: Mappable {
             bundle.height = Int(height)
         } else {
             bundle.height = self.height_l as? Int
-        }
-        
-        return bundle
-    }()
-
-    lazy var mediaBundle_o: MediaBundle = {
-        let bundle = MediaBundle()
-        
-        bundle.urlString = self.url_o
-        
-        if let width = self.width_o as? String {
-            bundle.width = Int(width)
-        } else {
-            bundle.width = self.width_o as? Int
-        }
-        
-        if let height = self.height_o as? String {
-            bundle.height = Int(height)
-        } else {
-            bundle.height = self.height_o as? Int
         }
         
         return bundle

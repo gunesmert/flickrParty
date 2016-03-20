@@ -9,7 +9,6 @@
 import Alamofire
 import ObjectMapper
 
-private let PublicFeedURL = "https://api.flickr.com/services/feeds/photos_public.gne"
 private let APIBaseURL = "https://api.flickr.com/services/rest/"
 
 private let APIKey = "74b3c29fd1071151559fc39aba3bb04c"

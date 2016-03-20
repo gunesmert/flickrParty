@@ -165,7 +165,7 @@ class MainViewController : BaseTableViewController {
     
     // MARK: - Cell Configuration
     
-    
+
     /**
         Configures FeedCell with the indexPath.
     */
