@@ -96,10 +96,10 @@ class BaseNavigationController : UINavigationController, UINavigationControllerD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationBar.barTintColor = UIColor.purpleColor()
+        self.navigationBar.barTintColor = UIColor.whiteColor()
         self.navigationBar.translucent = false
         self.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.mediumFont(withSize: 16.0),
-            NSForegroundColorAttributeName: UIColor.whiteColor()]
+            NSForegroundColorAttributeName: UIColor.lightGrayTextColor()]
         
         self.delegate = self
     }
