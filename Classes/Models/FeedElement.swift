@@ -19,16 +19,16 @@ class FeedElement: Mappable {
     private var dateTakenString: String?
     
     private var url_z: String?
-    private var height_z: String?
-    private var width_z: String?
+    private var height_z: AnyObject?
+    private var width_z: AnyObject?
     
     private var url_l: String?
-    private var height_l: String?
-    private var width_l: String?
+    private var height_l: AnyObject?
+    private var width_l: AnyObject?
     
     private var url_o: String?
-    private var height_o: String?
-    private var width_o: String?
+    private var height_o: AnyObject?
+    private var width_o: AnyObject?
     
     required init?(_ map: Map) {
         
@@ -67,8 +67,18 @@ class FeedElement: Mappable {
         let bundle = MediaBundle()
         
         bundle.urlString = self.url_z
-        bundle.width = Int(self.width_z!)
-        bundle.height = Int(self.height_z!)
+        
+        if let width = self.width_z as? String {
+            bundle.width = Int(width)
+        } else {
+            bundle.width = self.width_z as? Int
+        }
+        
+        if let height = self.height_z as? String {
+            bundle.height = Int(height)
+        } else {
+            bundle.height = self.height_z as? Int
+        }
         
         return bundle
     }()
@@ -77,18 +87,38 @@ class FeedElement: Mappable {
         let bundle = MediaBundle()
         
         bundle.urlString = self.url_l
-        bundle.width = Int(self.width_l!)
-        bundle.height = Int(self.height_l!)
+        
+        if let width = self.width_l as? String {
+            bundle.width = Int(width)
+        } else {
+            bundle.width = self.width_l as? Int
+        }
+        
+        if let height = self.height_l as? String {
+            bundle.height = Int(height)
+        } else {
+            bundle.height = self.height_l as? Int
+        }
         
         return bundle
     }()
-    
+
     lazy var mediaBundle_o: MediaBundle = {
         let bundle = MediaBundle()
         
         bundle.urlString = self.url_o
-        bundle.width = Int(self.width_o!)
-        bundle.height = Int(self.height_o!)
+        
+        if let width = self.width_o as? String {
+            bundle.width = Int(width)
+        } else {
+            bundle.width = self.width_o as? Int
+        }
+        
+        if let height = self.height_o as? String {
+            bundle.height = Int(height)
+        } else {
+            bundle.height = self.height_o as? Int
+        }
         
         return bundle
     }()

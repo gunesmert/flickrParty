@@ -65,6 +65,8 @@ class MainViewController : BaseTableViewController {
         }
         
         if refresh == true {
+            self.feedElements?.removeAll()
+            
             pageNumber = 1
         } else {
             pageNumber = NSNumber(integer: pageNumber.integerValue + 1)
@@ -108,7 +110,15 @@ class MainViewController : BaseTableViewController {
     // MARK: - UITableView Delegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row >= feedElements?.count {
+            return
+        }
         
+        let element = feedElements![indexPath.row]
+        
+        let detailViewController = DetailViewController(withElement: element)
+        
+        self.navigationController?.pushViewController(detailViewController, animated: true)
     }
     
     // MARK: - UITableView DataSource
