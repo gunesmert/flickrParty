@@ -142,7 +142,7 @@ class MainViewController : BaseTableViewController {
         cell.preservesSuperviewLayoutMargins = false
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
-        configure(PositionCell: cell, atIndexPath: indexPath)
+        configure(FeedCell: cell, atIndexPath: indexPath)
         
         return cell
     }
@@ -165,7 +165,11 @@ class MainViewController : BaseTableViewController {
     
     // MARK: - Cell Configuration
     
-    func configure(PositionCell cell: FeedCell, atIndexPath indexPath: NSIndexPath) {
+    
+    /**
+        Configures FeedCell with the indexPath.
+    */
+    func configure(FeedCell cell: FeedCell, atIndexPath indexPath: NSIndexPath) {
         if indexPath.row >= feedElements?.count {
             return
         }

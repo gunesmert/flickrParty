@@ -35,6 +35,12 @@ class NetworkClient {
         return Static.instance!
     }
     
+    
+    /**
+     Fetches feed elements with the given tags array.
+     
+     - returns: Fetched page number, number of total pages, feed elements and error.
+     */
     func getFeedElements(withPageNumber pageNumber:NSNumber, withTags tags: [String], completion: (NSNumber?, NSNumber?, [FeedElement]?, NSError?) -> Void) {
         var parameters: [String: AnyObject] = [:]
         parameters["page"] = pageNumber
