@@ -11,13 +11,14 @@ import ObjectMapper
 
 private let APIBaseURL = "https://api.flickr.com/services/rest/"
 
-private let APIKey = "74b3c29fd1071151559fc39aba3bb04c"
+private let APIKey = "c1b46f0a06463eef45f2293a30e21a01"
 
 let FLCNetworkClientErrorDomain = "FLCNetworkClientErrorDomain"
 
 enum ErrorCode: Int {
     case InvalidParameters = 600
     case InvalidJSON = 601
+    case InvalidAPI = 602
 }
 
 class NetworkClient {
@@ -90,7 +91,31 @@ class NetworkClient {
                         
                         completion(nil, nil, nil, inlineError)
                         
-                        return;
+                        return
+                    }
+                    
+                    if jsonDict.keys.contains("stat") == true {
+                        if (jsonDict["stat"] as! String) != "ok" {
+                            var message = NSLocalizedString("There is a problem with the API.", comment: "")
+                            
+                            if jsonDict.keys.contains("message") == true {
+                                message = jsonDict["stat"] as! String
+                            }
+                            
+                            let inlineError = NSError(domain: FLCNetworkClientErrorDomain, code: ErrorCode.InvalidAPI.rawValue, userInfo: [NSLocalizedDescriptionKey: message])
+                            
+                            completion(nil, nil, nil, inlineError)
+                            
+                            return
+                        }
+                    } else {
+                        let message = NSLocalizedString("There is a problem with the API.", comment: "")
+                        
+                        let inlineError = NSError(domain: FLCNetworkClientErrorDomain, code: ErrorCode.InvalidAPI.rawValue, userInfo: [NSLocalizedDescriptionKey: message])
+                        
+                        completion(nil, nil, nil, inlineError)
+                        
+                        return
                     }
                     
                     let pageNumber = (jsonDict as AnyObject).valueForKeyPath("photos.page") as! NSNumber
